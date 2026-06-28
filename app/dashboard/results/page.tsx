@@ -1,6 +1,17 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function ResultsPage() {
+  const [resumeFileName, setResumeFileName] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
+
+  useEffect(() => {
+    setResumeFileName(localStorage.getItem("resumeFileName") || "");
+    setJobDescription(localStorage.getItem("jobDescription") || "");
+  }, []);
+
   return (
     <main className="min-h-screen bg-slate-950 px-8 py-10 text-white">
       <div className="mx-auto max-w-5xl space-y-8">
@@ -10,6 +21,24 @@ export default function ResultsPage() {
             Review your resume match and open the content you want.
           </p>
         </div>
+
+        <section className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+          <h2 className="mb-4 text-2xl font-bold">Submitted Details</h2>
+
+          <div className="space-y-3">
+            <p>
+              <span className="font-semibold text-blue-400">Resume:</span>{" "}
+              {resumeFileName || "No Resume Uploaded"}
+            </p>
+
+            <p>
+              <span className="font-semibold text-blue-400">
+                Job Description:
+              </span>{" "}
+              {jobDescription.length} characters
+            </p>
+          </div>
+        </section>
 
         <section className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
           <h2 className="mb-6 text-2xl font-bold">Resume Match Analysis</h2>
@@ -26,7 +55,8 @@ export default function ResultsPage() {
             <div className="rounded-xl bg-slate-800 p-6">
               <h3 className="mb-3 text-xl font-semibold">ATS Insights</h3>
               <p className="text-slate-400">
-                Missing skills, matching keywords, and resume suggestions will appear here.
+                Missing skills, matching keywords, and resume suggestions will
+                appear here.
               </p>
             </div>
           </div>
@@ -47,7 +77,9 @@ export default function ResultsPage() {
             className="rounded-2xl border border-slate-800 bg-slate-900 p-6 hover:border-blue-500"
           >
             <h3 className="text-xl font-bold">LinkedIn Notes</h3>
-            <p className="mt-2 text-slate-400">Open 4 notes under 300 characters.</p>
+            <p className="mt-2 text-slate-400">
+              Open 4 notes under 300 characters.
+            </p>
             <p className="mt-6 text-blue-400">Open →</p>
           </Link>
 
